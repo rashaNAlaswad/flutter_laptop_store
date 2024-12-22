@@ -17,3 +17,11 @@ A Simulation for an e-commerce app.
 * [carousel_slider](https://pub.dev/packages/carousel_slider)
 * [flutter_svg](https://pub.dev/packages/flutter_svg)
 * [smooth_page_indicator](https://pub.dev/packages/smooth_page_indicator)
+
+
+## Video
+
+
+https://github.com/user-attachments/assets/04d7a77d-7202-4f42-9d04-f18321fba6c7
+
+
