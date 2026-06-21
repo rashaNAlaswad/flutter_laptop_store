@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/providers/laptops_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 
 import '../../../../data/model/laptop.dart';
-import '../../controllers/cart_controller.dart';
 import '../../../../routes/app_routes.dart';
 
-class CartItem extends GetView<CartController> {
+class CartItem extends ConsumerWidget {
   const CartItem({super.key, required this.laptop});
 
   final Laptop laptop;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final notifier = ref.read(laptopsProvider.notifier);
     return Padding(
       padding: const EdgeInsets.only(bottom: 16.0),
       child: Container(
@@ -74,42 +76,40 @@ class CartItem extends GetView<CartController> {
                   ),
                 ),
                 const SizedBox(height: 14),
-                GetBuilder<CartController>(
-                  builder: (controller) => Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      InkWell(
-                        onTap: () => controller.onIncrease(laptop.id),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.black12,
-                          ),
-                          child: const Icon(Icons.add),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    InkWell(
+                      onTap: () => notifier.increaseQuantity(laptop.id),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.black12,
                         ),
+                        child: const Icon(Icons.add),
                       ),
-                      const SizedBox(width: 18),
-                      Text(
-                        '${laptop.quantity}',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(width: 18),
+                    Text(
+                      '${laptop.quantity}',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    const SizedBox(width: 18),
+                    InkWell(
+                      onTap: () => notifier.decreaseQuantity(laptop.id),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.black12,
                         ),
+                        child: const Icon(Icons.remove),
                       ),
-                      const SizedBox(width: 18),
-                      InkWell(
-                        onTap: () => controller.onDecrease(laptop.id),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.black12,
-                          ),
-                          child: const Icon(Icons.remove),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -119,7 +119,7 @@ class CartItem extends GetView<CartController> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: InkWell(
-                onTap: () => controller.onDeleteItem(laptop.id),
+                onTap: () => notifier.removeFromCart(laptop.id),
                 child: const Icon(
                   Icons.delete,
                   color: Colors.grey,

@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/providers/laptops_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../config/translations/strings_enum.dart';
 import 'package:get/get.dart';
 
 import 'widget/laptop_item.dart';
-import '../controllers/home_controller.dart';
 import 'widget/banner_section.dart';
 
-class HomeView extends GetView<HomeController> {
+class HomeView extends ConsumerWidget {
   const HomeView({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final laptops = ref.watch(laptopsProvider);
+    final banners = ref.watch(bannersProvider);
     return Scaffold(
       body: ListView(
         children: [
@@ -28,7 +31,7 @@ class HomeView extends GetView<HomeController> {
                 ),
               ),
               const SizedBox(height: 16),
-              BannerSection(controller: controller),
+              BannerSection(banners: banners),
               const SizedBox(height: 12),
               Padding(
                 padding:
@@ -52,12 +55,12 @@ class HomeView extends GetView<HomeController> {
                       crossAxisSpacing: 20,
                       mainAxisExtent: 250,
                     ),
-                    itemCount: controller.laptops.length,
+                    itemCount: laptops.length,
                     shrinkWrap: true,
                     primary: false,
                     itemBuilder: (context, index) {
                       return LaptopItemWidget(
-                        laptop: controller.laptops[index],
+                        laptop: laptops[index],
                       );
                     }),
               ),
@@ -68,4 +71,3 @@ class HomeView extends GetView<HomeController> {
     );
   }
 }
-

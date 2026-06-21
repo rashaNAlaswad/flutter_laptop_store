@@ -3,11 +3,8 @@ import 'package:get/get.dart';
 
 import '../modules/base/bindings/base_bindings.dart';
 import '../modules/base/view/base_view.dart';
-import '../modules/cart/bindings/cart_bindings.dart';
 import '../modules/cart/view/cart_view.dart';
-import '../modules/details/bindings/details_bindings.dart';
 import '../modules/details/view/details_view.dart';
-import '../modules/favorites/bindings/favorite_bindings.dart';
 import '../modules/favorites/view/favorites_view.dart';
 import '../modules/home/view/home_view.dart';
 import '../modules/onboarding/bindings/on_boarding_binding.dart';
@@ -36,21 +33,21 @@ class AppPages {
         page: () => const BaseView(),
         binding: BaseBinding()),
     GetPage(
-        name: Routes.home,
-        page: () => const HomeView(),
-        binding: BaseBinding()),
+      name: Routes.home,
+      page: () => const HomeView(),
+    ),
     GetPage(
-        name: Routes.favorites,
-        page: () => const FavoritesView(),
-        binding: FavoriteBinding()),
+      name: Routes.favorites,
+      page: () => const FavoritesView(),
+    ),
     GetPage(
         name: Routes.cart,
         page: () => const CartView(),
-        binding: CartBinding()),
+       ),
     GetPage(
-        name: Routes.detail,
-        page: () => const DetailsView(),
-        binding: DetailsBinding()),
+      name: Routes.detail,
+      page: () => const DetailsView(),
+    ),
     GetPage(
         name: Routes.settings,
         page: () => const SettingsView(),

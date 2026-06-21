@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/providers/laptops_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../config/translations/strings_enum.dart';
 import 'package:get/get.dart';
 
 import '../../../components/custome_btn.dart';
 import '../../../data/local/app_shared_pref.dart';
-import '../controllers/details_controller.dart';
 
-class DetailsView extends GetView<DetailsController> {
+class DetailsView extends ConsumerWidget {
   const DetailsView({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final int laptopId = Get.arguments as int;
+    final laptop = ref.watch(laptopByIdProvider(laptopId));
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -31,29 +35,29 @@ class DetailsView extends GetView<DetailsController> {
                   top: 40,
                   left: 8,
                   child: Image.asset(
-                    controller.laptop.image,
+                    laptop.image,
                   ),
                 ),
                 Positioned(
-                    right: 16,
-                    top: 16,
-                    child: GetBuilder<DetailsController>(
-                      id: 'favorite',
-                      builder: (controller) => InkWell(
-                        onTap: () {
-                          controller.setFavorite();
-                        },
-                        child: controller.laptop.isFavourite
-                            ? const Icon(
-                                Icons.favorite,
-                                color: Colors.red,
-                              )
-                            : const Icon(
-                                Icons.favorite_border_outlined,
-                                color: Colors.grey,
-                              ),
-                      ),
-                    )),
+                  right: 16,
+                  top: 16,
+                  child: InkWell(
+                    onTap: () {
+                      ref
+                          .read(laptopsProvider.notifier)
+                          .toggleFavourite(laptop.id);
+                    },
+                    child: laptop.isFavourite
+                        ? const Icon(
+                            Icons.favorite,
+                            color: Colors.red,
+                          )
+                        : const Icon(
+                            Icons.favorite_border_outlined,
+                            color: Colors.grey,
+                          ),
+                  ),
+                ),
                 Positioned(
                     left: 16,
                     top: 16,
@@ -69,7 +73,7 @@ class DetailsView extends GetView<DetailsController> {
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: Text(
-                  controller.laptop.name,
+                  laptop.name,
                   style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -82,7 +86,7 @@ class DetailsView extends GetView<DetailsController> {
                 child: Row(
                   children: [
                     Text(
-                      '${controller.laptop.price} \$',
+                      '${laptop.price} \$',
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -92,7 +96,7 @@ class DetailsView extends GetView<DetailsController> {
                       flex: 1,
                     ),
                     const Icon(Icons.star_rounded, color: Colors.amber),
-                    Text(controller.laptop.rating.toString(),
+                    Text(laptop.rating.toString(),
                         style:
                             const TextStyle(fontSize: 16, color: Colors.grey)),
                   ],
@@ -106,10 +110,10 @@ class DetailsView extends GetView<DetailsController> {
                 child: CustomButton(
                   label: Strings.addToCart.tr,
                   onPressed: () {
-                    controller.addToCart();
+                    ref.read(laptopsProvider.notifier).addToCart(laptop.id);
                     Get.snackbar(
                       Strings.successSnackbarTitle.tr,
-                      '${controller.laptop.name} ${Strings.successSnackbarMessage.tr}',
+                      '${laptop.name} ${Strings.successSnackbarMessage.tr}',
                       backgroundColor: Colors.black87,
                       colorText: Colors.white,
                       snackStyle: SnackStyle.FLOATING,

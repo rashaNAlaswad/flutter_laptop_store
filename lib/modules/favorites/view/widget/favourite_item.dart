@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/providers/laptops_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 
 import '../../../../data/model/laptop.dart';
 import '../../../../routes/app_routes.dart';
-import '../../../home/controllers/home_controller.dart';
-import '../../controllers/favorite_controller.dart';
 
-class FavouriteItem extends GetView<FavoriteController> {
+class FavouriteItem extends ConsumerWidget {
   const FavouriteItem({super.key, required this.laptop});
 
   final Laptop laptop;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16.0),
       child: Container(
@@ -77,28 +77,26 @@ class FavouriteItem extends GetView<FavoriteController> {
             flex: 1,
           ),
           Positioned(
-              right: 16,
-              top: 16,
-              child: GetBuilder<HomeController>(
-                id: 'favorite',
-                builder: (controller) => Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: InkWell(
-                    onTap: () {
-                      controller.setFavorite(laptop.id);
-                    },
-                    child: laptop.isFavourite
-                        ? const Icon(
-                            Icons.favorite,
-                            color: Colors.red,
-                          )
-                        : const Icon(
-                            Icons.favorite_border_outlined,
-                            color: Colors.grey,
-                          ),
-                  ),
-                ),
-              )),
+            right: 16,
+            top: 16,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: InkWell(
+                onTap: () {
+                  ref.read(laptopsProvider.notifier).toggleFavourite(laptop.id);
+                },
+                child: laptop.isFavourite
+                    ? const Icon(
+                        Icons.favorite,
+                        color: Colors.red,
+                      )
+                    : const Icon(
+                        Icons.favorite_border_outlined,
+                        color: Colors.grey,
+                      ),
+              ),
+            ),
+          ),
         ]),
       ),
     );
