@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_application_1/providers/local_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../controller/settings_controller.dart';
-
-
-class LanguageItem extends GetView<SettingsController> {
+class LanguageItem extends ConsumerWidget {
   const LanguageItem({
     super.key,
     required this.title,
@@ -14,15 +12,17 @@ class LanguageItem extends GetView<SettingsController> {
   final String languageCode;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selectedLanguage = ref.watch(localProvider);
+
     return ListTile(
-          title: Text(title),
-          trailing: (controller.selectedLanguage == languageCode)
-              ? const Icon(Icons.check)
-              : const SizedBox(),
-          onTap: () {
-            controller.updateLanguage(languageCode);
-          },
-        );
+      title: Text(title),
+      trailing: (selectedLanguage.languageCode == languageCode)
+          ? const Icon(Icons.check)
+          : const SizedBox(),
+      onTap: () {
+        ref.read(localProvider.notifier).updateLanguage(languageCode);
+      },
+    );
   }
 }

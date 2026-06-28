@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/extensions/l10n_extensions.dart';
 import 'package:flutter_application_1/providers/laptops_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 
-import '../../../../config/translations/strings_enum.dart';
 import 'widget/cart_item.dart';
 import '../../../components/custome_btn.dart';
 import '../../../components/no_data.dart';
@@ -26,7 +26,7 @@ class CartView extends ConsumerWidget {
               padding:
                   const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
               child: Text(
-                Strings.cart.tr,
+                context.l10n.cart,
                 style:
                     const TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
               ),
@@ -47,11 +47,11 @@ class CartView extends ConsumerWidget {
             ),
             carts.isEmpty
                 ? NoData(
-                    text: Strings.emptyCart.tr,
+                    text: context.l10n.emptyCart,
                     image: 'assets/images/empty_cart.svg')
                 : Column(
                     children: [
-                      Text(Strings.total.tr,
+                      Text(context.l10n.total,
                           style: const TextStyle(fontSize: 20)),
                       const SizedBox(height: 8),
                       Text(
@@ -62,11 +62,11 @@ class CartView extends ConsumerWidget {
                       Padding(
                         padding: const EdgeInsets.all(16),
                         child: CustomButton(
-                            label: Strings.checkout.tr,
+                            label: context.l10n.checkout,
                             onPressed: () {
                               Get.snackbar(
-                                Strings.faildSnackbarTitle.tr,
-                                Strings.faildSnackbarMessage.tr,
+                                context.l10n.faildSnackbarTitle,
+                                context.l10n.faildSnackbarMessage,
                                 backgroundColor: Colors.red,
                                 colorText: Colors.white,
                                 snackStyle: SnackStyle.FLOATING,

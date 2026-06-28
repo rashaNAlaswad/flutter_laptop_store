@@ -1,0 +1,23 @@
+{
+  "home": "Home",
+  "favorites": "Favorites",
+  "cart": "Cart",
+  "newLaptops": "New Laptops",
+  "addToCart": "Add To Cart",
+  "noFavorites": "No Favorites",
+  "emptyCart": "Empty Cart",
+  "checkout": "Check out",
+  "total": "Total",
+  "skip": "Skip",
+  "next": "Next",
+  "start": "Get Started",
+  "settings": "Settings",
+  "english": "English",
+  "arabic": "Arabic",
+  "language": "Language",
+  "successSnackbarTitle": "Hooray",
+  "successSnackbarMessage": "has been added to your cart successfully",
+  "faildSnackbarTitle": "Sorry",
+  "faildSnackbarMessage":
+      "We can not handle this process now, please try again later"
+}

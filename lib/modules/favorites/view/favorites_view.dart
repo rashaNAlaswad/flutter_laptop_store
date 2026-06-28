@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/providers/laptops_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../config/translations/strings_enum.dart';
-import 'package:get/get.dart';
+import 'package:flutter_application_1/extensions/l10n_extensions.dart';
 
 import '../../../components/no_data.dart';
 import 'widget/favourite_item.dart';
@@ -23,7 +22,7 @@ class FavoritesView extends ConsumerWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
                 child: Text(
-                  Strings.favorites.tr,
+                  context.l10n.favorites,
                   style: const TextStyle(
                       fontWeight: FontWeight.bold, fontSize: 28),
                 ),
@@ -31,7 +30,7 @@ class FavoritesView extends ConsumerWidget {
               const SizedBox(height: 16),
               favourite.isEmpty
                   ? NoData(
-                      text: Strings.noFavorites.tr,
+                      text: context.l10n.noFavorites,
                       image: 'assets/images/favourite_item.svg')
                   : Padding(
                       padding: const EdgeInsets.symmetric(

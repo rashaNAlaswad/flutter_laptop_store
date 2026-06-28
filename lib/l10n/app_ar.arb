@@ -1,0 +1,22 @@
+{
+  "home": "الرئيسية",
+  "favorites": "المفضلة",
+  "cart": "عربة التسوق",
+  "newLaptops": "أحدث اللابتوبات",
+  "addToCart": "اضافة للعربة",
+  "noFavorites": "ليس هنالك مفضلات",
+  "emptyCart": "عربة التسوق فارغة",
+  "checkout": "الدفع",
+  "total": "المجموع",
+  "skip": "تخطي",
+  "next": "التالي",
+  "start": "ابدء",
+  "settings": "الاعدادات",
+  "english": "اللغة الانجليزية",
+  "arabic": "اللغة العربية",
+  "language": "اللغة",
+  "successSnackbarTitle": "مرحا",
+  "successSnackbarMessage": "تمت اضافته إلى السلة بنجاح",
+  "faildSnackbarTitle": "عذرا",
+  "faildSnackbarMessage": "لا يمكن القيام بهذه العملية الان, الرجاء المحاولة مرة أخرى"
+}

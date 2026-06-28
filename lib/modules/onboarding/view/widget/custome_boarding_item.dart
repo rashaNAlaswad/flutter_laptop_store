@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../../../../../config/translations/strings_enum.dart';
+import 'package:flutter_application_1/extensions/l10n_extensions.dart';
 import '../../../../components/custome_btn.dart';
 import '../../../../data/local/app_shared_pref.dart';
 import '../../../../routes/app_routes.dart';
@@ -53,7 +53,7 @@ class OnBoaringWidget extends GetView<OnBoardingController> {
                     await AppSharedPreference.setOnBoardingState(true);
                     Get.offAllNamed(Routes.base);
                   },
-                  label: Strings.start.tr,
+                  label: context.l10n.start,
                 ),
               )
             : const SizedBox(),

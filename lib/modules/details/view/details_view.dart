@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/providers/laptops_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../config/translations/strings_enum.dart';
+import 'package:flutter_application_1/extensions/l10n_extensions.dart';
 import 'package:get/get.dart';
 
 import '../../../components/custome_btn.dart';
@@ -108,12 +108,12 @@ class DetailsView extends ConsumerWidget {
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: CustomButton(
-                  label: Strings.addToCart.tr,
+                  label: context.l10n.addToCart,
                   onPressed: () {
                     ref.read(laptopsProvider.notifier).addToCart(laptop.id);
                     Get.snackbar(
-                      Strings.successSnackbarTitle.tr,
-                      '${laptop.name} ${Strings.successSnackbarMessage.tr}',
+                      context.l10n.successSnackbarTitle,
+                      '${laptop.name} ${context.l10n.successSnackbarMessage}',
                       backgroundColor: Colors.black87,
                       colorText: Colors.white,
                       snackStyle: SnackStyle.FLOATING,

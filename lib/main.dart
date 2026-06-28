@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/providers/local_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'config/translations/localization_service.dart';
 import 'package:get/get.dart';
 
 import 'data/local/app_shared_pref.dart';
 import 'routes/app_pages.dart';
+import 'l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,11 +14,12 @@ void main() async {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final locale = ref.watch(localProvider);
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Laptop Store',
@@ -27,8 +29,9 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: AppPages.initial,
       getPages: AppPages.routes,
-      translations: LocalizationService.getInstance(),
-      locale: LocalizationService.getCurrentLocal(),
+      locale: locale,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
     );
   }
 }

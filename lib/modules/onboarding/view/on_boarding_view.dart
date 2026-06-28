@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../../../config/translations/strings_enum.dart';
+import 'package:flutter_application_1/extensions/l10n_extensions.dart';
 import '../controller/on_boarding_controller.dart';
 import 'widget/custome_boarding_item.dart';
 
@@ -59,7 +59,7 @@ class OnBoardingBottomSheet extends StatelessWidget {
               ? TextButton(
                   onPressed: () => pageController.jumpToPage(2),
                   child: Text(
-                    Strings.skip.tr,
+                    context.l10n.skip,
                     style: const TextStyle(color: Colors.black),
                   ),
                 )
@@ -80,7 +80,7 @@ class OnBoardingBottomSheet extends StatelessWidget {
                       duration: const Duration(milliseconds: 300),
                       curve: Curves.easeIn),
                   child: Text(
-                    Strings.next.tr,
+                    context.l10n.next,
                     style: const TextStyle(color: Colors.black),
                   ),
                 )

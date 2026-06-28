@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../config/translations/strings_enum.dart';
+import 'package:flutter_application_1/extensions/l10n_extensions.dart';
 import 'package:get/get.dart';
 
 import '../../cart/view/cart_view.dart';
@@ -36,18 +36,18 @@ class BaseView extends GetView<BaseController> {
           items: [
             BottomNavigationBarItem(
               icon: const Icon(Icons.home),
-              label: Strings.home.tr,
+              label: context.l10n.home,
             ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.favorite),
-              label: Strings.favorites.tr,
+              label: context.l10n.favorites,
             ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.shopping_cart),
-              label: Strings.cart.tr,
+              label: context.l10n.cart,
             ),
             BottomNavigationBarItem(
-                icon: const Icon(Icons.settings), label: Strings.settings.tr),
+                icon: const Icon(Icons.settings), label: context.l10n.settings),
           ],
         ),
       ),

@@ -9,7 +9,6 @@ import '../modules/favorites/view/favorites_view.dart';
 import '../modules/home/view/home_view.dart';
 import '../modules/onboarding/bindings/on_boarding_binding.dart';
 import '../modules/onboarding/view/on_boarding_view.dart';
-import '../modules/settings/bindings/settings_bindings.dart';
 import '../modules/settings/view/settings_view.dart';
 import '../modules/splash/bindings/splash_bindings.dart';
 import '../modules/splash/view/splash_view.dart';
@@ -41,16 +40,13 @@ class AppPages {
       page: () => const FavoritesView(),
     ),
     GetPage(
-        name: Routes.cart,
-        page: () => const CartView(),
-       ),
+      name: Routes.cart,
+      page: () => const CartView(),
+    ),
     GetPage(
       name: Routes.detail,
       page: () => const DetailsView(),
     ),
-    GetPage(
-        name: Routes.settings,
-        page: () => const SettingsView(),
-        binding: SettingsBinding()),
+    GetPage(name: Routes.settings, page: () => const SettingsView()),
   ];
 }
