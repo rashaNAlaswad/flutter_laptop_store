@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/providers/laptops_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../data/model/laptop.dart';
 import '../../../../routes/app_routes.dart';
@@ -39,7 +39,7 @@ class FavouriteItem extends ConsumerWidget {
                 left: 8,
                 child: InkWell(
                   onTap: () {
-                    Get.toNamed(Routes.detail, arguments: laptop);
+                    context.push(Routes.detailPath(laptop.id));
                   },
                   child: Image.asset(
                     laptop.image,

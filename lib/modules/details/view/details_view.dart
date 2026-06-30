@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/providers/laptops_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_application_1/extensions/l10n_extensions.dart';
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../components/custome_btn.dart';
-import '../../../data/local/app_shared_pref.dart';
 
 class DetailsView extends ConsumerWidget {
-  const DetailsView({super.key});
+  const DetailsView({super.key, required this.laptopId});
+
+  final int laptopId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final int laptopId = Get.arguments as int;
     final laptop = ref.watch(laptopByIdProvider(laptopId));
 
     return Scaffold(
@@ -61,11 +61,11 @@ class DetailsView extends ConsumerWidget {
                 Positioned(
                     left: 16,
                     top: 16,
-                    child: InkWell(
-                        onTap: () => Get.back(),
-                        child: (AppSharedPreference.getLocal() == 'en')
-                            ? const Icon(Icons.arrow_back)
-                            : const Icon(Icons.arrow_forward))),
+                    child: BackButton(
+                      onPressed: () {
+                        context.pop();
+                      },
+                    )),
               ]),
               const SizedBox(
                 height: 20,
@@ -111,13 +111,15 @@ class DetailsView extends ConsumerWidget {
                   label: context.l10n.addToCart,
                   onPressed: () {
                     ref.read(laptopsProvider.notifier).addToCart(laptop.id);
-                    Get.snackbar(
-                      context.l10n.successSnackbarTitle,
-                      '${laptop.name} ${context.l10n.successSnackbarMessage}',
-                      backgroundColor: Colors.black87,
-                      colorText: Colors.white,
-                      snackStyle: SnackStyle.FLOATING,
-                      snackPosition: SnackPosition.TOP,
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          '${laptop.name} ${context.l10n.successSnackbarMessage}',
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                        backgroundColor: Colors.black87,
+                        behavior: SnackBarBehavior.floating,
+                      ),
                     );
                   },
                 ),

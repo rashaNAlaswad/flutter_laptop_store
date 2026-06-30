@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/extensions/l10n_extensions.dart';
 import 'package:flutter_application_1/providers/laptops_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get/get.dart';
 
 import 'widget/cart_item.dart';
 import '../../../components/custome_btn.dart';
@@ -64,14 +63,15 @@ class CartView extends ConsumerWidget {
                         child: CustomButton(
                             label: context.l10n.checkout,
                             onPressed: () {
-                              Get.snackbar(
-                                context.l10n.faildSnackbarTitle,
-                                context.l10n.faildSnackbarMessage,
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                behavior: SnackBarBehavior.floating,
                                 backgroundColor: Colors.red,
-                                colorText: Colors.white,
-                                snackStyle: SnackStyle.FLOATING,
-                                snackPosition: SnackPosition.TOP,
-                              );
+                                content: Text(
+                                    '${context.l10n.faildSnackbarTitle}: ${context.l10n.faildSnackbarMessage}',
+                                    style:
+                                        const TextStyle(color: Colors.white)),
+                              ));
                             }),
                       )
                     ],

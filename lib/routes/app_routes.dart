@@ -8,4 +8,6 @@ class Routes {
   static const String cart = '/cart';
   static const String detail = '/detail';
   static const String settings = '/settings';
+
+  static String detailPath(int id) => '/detail/$id';
 }

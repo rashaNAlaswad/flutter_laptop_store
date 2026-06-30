@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/providers/laptops_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../data/model/laptop.dart';
 import '../../../../routes/app_routes.dart';
@@ -15,7 +15,7 @@ class LaptopItemWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
       onTap: () {
-        Get.toNamed(Routes.detail, arguments: laptop.id);
+        context.push(Routes.detailPath(laptop.id));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -80,9 +80,6 @@ class LaptopItemWidget extends ConsumerWidget {
                   fontWeight: FontWeight.bold,
                   overflow: TextOverflow.ellipsis,
                 ),
-                textDirection: (Get.locale?.countryCode == 'ar')
-                    ? TextDirection.rtl
-                    : TextDirection.ltr,
               ),
             ),
           ],
